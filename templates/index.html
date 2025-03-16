@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>戒指尺寸测量</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>戒指尺寸测量工具</h1>
+        
+        <div class="upload-section">
+            <div class="file-input-container">
+                <input type="file" id="image-input" accept="image/*">
+                <label for="image-input" class="file-input-label">选择图片</label>
+            </div>
+            <button id="measure-btn" disabled>测量尺寸</button>
+        </div>
+        
+        <div class="image-container">
+            <div class="image-box">
+                <h3>原始图片</h3>
+                <div id="original-image-container">
+                    <img id="original-image" src="" alt="原始图片将显示在这里" style="display: none;">
+                    <div class="placeholder">请上传图片</div>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3>测量结果</h3>
+                <div id="result-image-container">
+                    <img id="result-image" src="" alt="测量结果将显示在这里" style="display: none;">
+                    <div class="placeholder">测量结果将显示在这里</div>
+                </div>
+                <div id="measurement-result" class="result-text"></div>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>正在测量中...</p>
+        </div>
+        
+        <div id="error-message" class="error-message"></div>
+    </div>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

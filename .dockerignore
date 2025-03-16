@@ -39,15 +39,12 @@ build/
 dist/
 *.egg-info/
 
-# 上传的文件（可能包含用户数据）
-static/uploads/*
-!static/uploads/.gitkeep
-
-# 数据库文件
-*.db
-*.sqlite
-*.sqlite3
+# 上传的文件（如果需要保留）
+# static/uploads/
 
 # 其他不需要的文件
-.DS_Store
-Thumbs.db 
+.git/
+.github/
+.gitignore
+README.md
+LICENSE 
