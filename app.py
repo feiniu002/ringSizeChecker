@@ -67,7 +67,7 @@ def measure():
             if circumference_mm is not None:
                 response_data['circumference'] = f"{circumference_mm:.2f}"
             if ring_size_cn is not None:
-                response_data['ring_size'] = f"{ring_size_cn:.1f}"
+                response_data['ring_size'] = f"{ring_size_cn}"
             
             return jsonify(response_data)
         else:

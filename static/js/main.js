@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 添加戒指尺寸信息（如果有）
             if (data.ring_size) {
-                resultHTML += `<p>戒指尺寸(中国标准): ${data.ring_size}</p>`;
+                resultHTML += `<p>戒指圈号: ${data.ring_size}</p>`;
             }
             
             // 如果没有测量结果

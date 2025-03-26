@@ -272,7 +272,7 @@ def measure_finger_width(hull, finger_mask, debug_dir=None):
                 finger_width_pixels = min(rotated_width, rotated_height)
 
                 # 按比例进行一定补偿
-                finger_width_pixels = int(finger_width_pixels * 0.85)
+                finger_width_pixels = int(finger_width_pixels * 0.75)
             else:
                 # 如果旋转后无法计算宽度，回退到最小外接矩形的方法
                 finger_width_pixels = min(width, height)
@@ -300,7 +300,7 @@ def calculate_real_measurements(finger_width_pixels, card_contour_small):
         print(f"手指宽度: {finger_width_mm:.2f} 毫米")
         
         # 估计手指厚度（假设宽高比为1.2:1）
-        finger_height_mm = finger_width_mm / 1.2
+        finger_height_mm = finger_width_mm / 1
         
         # 使用椭圆周长公式计算手指周长
         a = finger_width_mm / 2
@@ -310,19 +310,29 @@ def calculate_real_measurements(finger_width_pixels, card_contour_small):
         
         print(f"手指周长: {finger_circumference_mm:.2f} 毫米")
         
-        # 计算戒指尺寸（中国标准）
-        ring_size_cn = finger_circumference_mm / np.pi
-        print(f"戒指尺寸(中国标准): {ring_size_cn:.1f}")
+        # 圈号对照表(周长范围,圈号)
+        ring_size_table = [
+            (54.4, 7),   # 7号圈周长约44.2mm
+            (56.9, 8),   # 8号圈周长约47.1mm 
+            (59.5, 9),   # 9号圈周长约50.0mm
+            (62.1, 10),  # 10号圈周长约52.8mm
+            (64.6, 11),  # 11号圈周长约55.7mm
+            (67.2, 12),  # 12号圈周长约58.6mm
+            (70.0, 13),  # 13号圈周长约70.0mm
+        ]
         
-        # 计算戒指尺寸（美国标准）
-        ring_size_us = finger_circumference_mm / 2.55 - 36.5
-        print(f"戒指尺寸(美国标准): {ring_size_us:.1f}")
+        # 根据周长查找最接近的圈号
+        ring_size_cn = None
+        min_diff = float('inf')
+        for circ, size in ring_size_table:
+            diff = abs(finger_circumference_mm - circ)
+            if diff < min_diff:
+                min_diff = diff
+                ring_size_cn = size
+                
+        print(f"戒指圈号: {ring_size_cn}")
         
-        # 计算戒指尺寸（欧洲标准）
-        ring_size_eu = finger_circumference_mm / 3.14 * 2
-        print(f"戒指尺寸(欧洲标准): {ring_size_eu:.1f}")
-        
-        return finger_width_mm, finger_circumference_mm, ring_size_cn, ring_size_us, ring_size_eu
+        return finger_width_mm, finger_circumference_mm, ring_size_cn
         
     except Exception as e:
         print(f"计算实际宽度时出错: {str(e)}")
@@ -544,7 +554,7 @@ def measure_finger_size(image):
             finger_width_pixels, main_line, box = measure_finger_width(hull, finger_mask, debug_dir)
             
             # 计算实际测量值
-            finger_width_mm, finger_circumference_mm, ring_size_cn, ring_size_us, ring_size_eu = calculate_real_measurements(
+            finger_width_mm, finger_circumference_mm, ring_size_cn = calculate_real_measurements(
                 finger_width_pixels, card_contour_small)
             
             # 在图像上绘制测量线

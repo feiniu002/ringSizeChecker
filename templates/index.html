@@ -13,47 +13,48 @@
         <!-- 图片要求部分 -->
         <div class="image-requirements">
             <h2>图片要求</h2>
-            <ul>
-                <li>拍摄背景必须白色背景</li>
-                <li>将手指放置于卡片左边</li>
-                <li>卡片与手指尽量留有2cm以上距离</li>
-                <li>卡片不能是白色底</li>
-            </ul>
+            <img src="/static/images/Sample.jpg" alt="图片要求示例" style="width: 600px; margin: 10px 0;">
         </div>
         
-        <div class="upload-section">
-            <div class="file-input-container">
-                <input type="file" id="image-input" accept="image/*">
-                <label for="image-input" class="file-input-label">选择图片</label>
-            </div>
-            <button id="measure-btn" disabled>测量尺寸</button>
-        </div>
         
-        <div class="image-container">
-            <div class="image-box">
-                <h3>原始图片</h3>
-                <div id="original-image-container">
-                    <img id="original-image" src="" alt="原始图片将显示在这里" style="display: none;">
-                    <div class="placeholder">请上传图片</div>
+        <div class="size-check">
+            <h2>圈号测量</h2>
+            <div class="image-container">
+                <div class="image-box">
+                    <h3>原始图片</h3>
+                    <div id="original-image-container">
+                        <img id="original-image" src="" alt="原始图片将显示在这里" style="display: none;">
+                        <div class="placeholder">请上传图片</div>
+                    </div>
+                </div>
+                
+                <div class="image-box">
+                    <h3>测量结果</h3>
+                    <div id="result-image-container">
+                        <img id="result-image" src="" alt="测量结果将显示在这里" style="display: none;">
+                        <div class="placeholder">测量结果将显示在这里</div>
+                    </div>
+                    <div id="measurement-result" class="result-text"></div>
                 </div>
             </div>
             
-            <div class="image-box">
-                <h3>测量结果</h3>
-                <div id="result-image-container">
-                    <img id="result-image" src="" alt="测量结果将显示在这里" style="display: none;">
-                    <div class="placeholder">测量结果将显示在这里</div>
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>正在测量中...</p>
+            </div>
+            
+            <div id="error-message" class="error-message"></div>
+    
+            <div class="upload-section">
+                <div class="file-input-container">
+                    <input type="file" id="image-input" accept="image/*">
+                    <label for="image-input" class="file-input-label">选择图片</label>
                 </div>
-                <div id="measurement-result" class="result-text"></div>
+                <button id="measure-btn" class="button" disabled style="padding: 13px 24px; font-size: 15px;">测量尺寸</button>
             </div>
         </div>
-        
-        <div id="loading" class="loading" style="display: none;">
-            <div class="spinner"></div>
-            <p>正在测量中...</p>
-        </div>
-        
-        <div id="error-message" class="error-message"></div>
+
+
     </div>
     
     <script src="/static/js/main.js"></script>
